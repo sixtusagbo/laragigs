@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,19 +14,20 @@ use \Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('listings', [
+        'heading' => 'Latest Listings',
+        'listings' => [
+            [
+                'id' => 1,
+                'title' => 'Listing 1',
+                'description' => 'lorem dummy whhhh',
+            ],
+            [
+                'id' => 2,
+                'title' => 'Listing 2',
+                'description' => 'lorem dummy ooooo',
+            ],
+        ]
+    ]);
 });
 
-Route::get('/hello', function () {
-    return response('<h1>Hello World!</h1>', 200)
-        ->header('Content-Type', 'text/plain')
-        ->header('foo', 'bar');
-});
-
-Route::get('/posts/{id}', function ($id) {
-    return response('Post ' . $id);
-})->where('id', '[0-9]+');
-
-Route::get('/search', function (Request $request) {
-    return $request->name . ' ' . $request->city;
-});
